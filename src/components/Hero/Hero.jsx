@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Hero.module.css";
+import HeroImage from "../../assets/images/Human-Rights.png"; // Adjust the path as necessary
 
 const Hero = () => (
   <section className={styles.hero}>
@@ -22,13 +23,13 @@ const Hero = () => (
           </button>
         </div>
       </div>
-      <div className={styles.right}>
+      {/* <div className={styles.right}>
         <img
-          src="/images/Volunteering-Group.png"
+          src={HeroImage}
           alt="Volunteers working together"
           className={styles.heroImg}
         />
-      </div>
+      </div> */}
     </div>
   </section>
 );

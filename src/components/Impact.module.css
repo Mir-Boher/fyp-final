@@ -1,0 +1,34 @@
+.impactContainer {
+  background-color: #ffdd65;
+  padding: 3.5rem 2.5rem;
+  border-radius: 0.75rem;
+  margin: 2rem;
+}
+
+.heading {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2rem;
+}
+.impact_stats_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.statNumber {
+  font-size: 3rem;
+  font-weight: 500;
+  color: #333;
+}
+.statDescription {
+  font-size: 1rem;
+  color: #555;
+}
+
+.impact_stats_block {
+  border-left: 1px solid #fff;
+  padding-left: 1.5rem;
+  /* height: 100px; */
+}

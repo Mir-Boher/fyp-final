@@ -9,9 +9,12 @@ const TestimonialsCard = ({ name, image, text }) => (
       {Array(5)
         .fill(0)
         .map((_, i) => (
-          <span key={i} className={styles.star}>★</span>
+          <span key={i} className={styles.star}>
+            ★
+          </span>
         ))}
     </div>
     <div className={styles.text}>{text}</div>
   </div>
 );
+export default TestimonialsCard;
