@@ -1,22 +1,19 @@
 import React from "react";
-import styles from "./OpportunityCard.module.css"; // Adjust the path as necessary
-import HumanRight from "../../assets/images/Human-Rights.png"; // Adjust the path as necessary
-const OpportunityCard = () => {
+import styles from "./OpportunityCard.module.css";
+import humanRightsImg from "../../assets/images/Human-Rights.png";
+
+const OpportunityCard = ({ title, description, image, date }) => {
   return (
     <div className={styles.opportunityCard}>
-      <div className={styles.opportunityHeader}>Project</div>
+      <div className={styles.opportunityHeader}>{title}</div>
       <div className={styles.opportunityImage}>
-        <img src={HumanRight} alt="Opportunity" />
+        <img src={humanRightsImg} alt="Opportunity" />
       </div>
       <div className={styles.opportunityDescription}>
-        <p>
-          Join us as a volunteer and help support local initiatives focused on
-          education, health, and empowerment.
-        </p>
+        <p>{description}</p>
       </div>
       <div className={styles.opportunityDetails}>
-        {/* <div className={styles.opportunityLocation}>Location: Remote</div> */}
-        <div className={styles.opportunityDate}>Posted 11 Nov, 2025</div>
+        <div className={styles.opportunityDate}>{date}</div>
       </div>
       <div className={styles.opportunityActions}>
         <button>View Opportunity</button>
