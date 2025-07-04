@@ -1,4 +1,4 @@
-.loginContainer {
+.signupContainer {
   max-width: 420px;
   margin: 40px auto;
   background: #fff;
@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.loginTitle {
+.signupTitle {
   font-size: 2rem;
   font-weight: 700;
   color: #222;
@@ -18,28 +18,28 @@
   text-align: center;
 }
 
-.loginSubtitle {
+.signupSubtitle {
   font-size: 1rem;
   color: #444;
   margin-bottom: 2rem;
   text-align: center;
 }
 
-.loginForm {
+.signupForm {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
 
-.loginLabel {
+.signupLabel {
   font-size: 1rem;
   color: #222;
   margin-bottom: 0.3rem;
   font-weight: 500;
 }
 
-.loginInput {
+.signupInput {
   width: 100%;
   padding: 0.8rem 1rem;
   border: 1px solid #e2e8f0;
@@ -49,36 +49,36 @@
   transition: border 0.2s;
 }
 
-.loginInput:focus {
+.signupInput:focus {
   border: 1.5px solid #3182ce;
   outline: none;
   background: #fff;
 }
 
-.loginCheckboxRow {
+.signupCheckboxRow {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin-top: 0.5rem;
 }
 
-.loginCheckbox {
+.signupCheckbox {
   width: 18px;
   height: 18px;
   accent-color: #3182ce;
 }
 
-.loginTerms {
+.signupTerms {
   font-size: 0.95rem;
   color: #444;
 }
 
-.loginTerms a {
+.signupTerms a {
   color: #3182ce;
   text-decoration: underline;
 }
 
-.loginButton {
+.signupButton {
   width: 100%;
   padding: 0.9rem 0;
   background: #000;
@@ -92,10 +92,10 @@
   transition: background 0.2s;
 }
 
-.loginButton:hover {
+.signupButton:hover {
   background: #222;
 }
-.loginButton:disabled {
+.signupButton:disabled {
   background: #ccc;
   cursor: not-allowed;
 }

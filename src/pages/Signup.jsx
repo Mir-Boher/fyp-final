@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./Login.module.css";
+import styles from "./Signup.module.css";
 
-const Login = () => {
+const Signup = () => {
   return (
-    <div className={styles.loginContainer}>
+    <div className={styles.signupContainer}>
       <div style={{ marginBottom: "1.5rem", textAlign: "center" }}>
         <div
           style={{
@@ -30,78 +30,64 @@ const Login = () => {
             <path d="M6 30c0-4 5.4-7 12-7s12 3 12 7" />
           </svg>
         </div>
-        <div className={styles.loginTitle}>Sign up as a volunteer</div>
-        <div className={styles.loginSubtitle}>
+        <div className={styles.signupTitle}>Sign up as a volunteer</div>
+        <div className={styles.signupSubtitle}>
           We're looking forward to connecting your nonprofit with volunteers!
           Create your nonprofit profile to request inspiring, building support.
         </div>
       </div>
 
-      {/* Or divider */}
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          margin: "1.5rem 0",
-        }}
-      >
-        <hr style={{ flex: 1, border: "none", borderTop: "1px solid #eee" }} />
-        <span style={{ margin: "0 1rem", color: "#888" }}>Or</span>
-        <hr style={{ flex: 1, border: "none", borderTop: "1px solid #eee" }} />
-      </div>
-
-      <form className={styles.loginForm}>
+      <form className={styles.signupForm}>
         <div style={{ display: "flex", gap: "1rem" }}>
           <div style={{ flex: 1 }}>
-            <label className={styles.loginLabel}>First name</label>
+            <label className={styles.signupLabel}>First name</label>
             <input
-              className={styles.loginInput}
+              className={styles.signupInput}
               type="text"
               placeholder="First name"
             />
           </div>
           <div style={{ flex: 1 }}>
-            <label className={styles.loginLabel}>Last name</label>
+            <label className={styles.signupLabel}>Last name</label>
             <input
-              className={styles.loginInput}
+              className={styles.signupInput}
               type="text"
               placeholder="Last name"
             />
           </div>
         </div>
         <div>
-          <label className={styles.loginLabel}>Email Address</label>
+          <label className={styles.signupLabel}>Email Address</label>
           <input
-            className={styles.loginInput}
+            className={styles.signupInput}
             type="email"
             placeholder="Email Address"
           />
         </div>
         <div>
-          <label className={styles.loginLabel}>Password</label>
+          <label className={styles.signupLabel}>Password</label>
           <input
-            className={styles.loginInput}
+            className={styles.signupInput}
             type="password"
             placeholder="Password"
           />
         </div>
         <div>
-          <label className={styles.loginLabel}>Confirm Password</label>
+          <label className={styles.signupLabel}>Confirm Password</label>
           <input
-            className={styles.loginInput}
+            className={styles.signupInput}
             type="password"
             placeholder="Confirm Password"
           />
         </div>
-        <div className={styles.loginCheckboxRow}>
-          <input className={styles.loginCheckbox} type="checkbox" id="terms" />
-          <label htmlFor="terms" className={styles.loginTerms}>
+        <div className={styles.signupCheckboxRow}>
+          <input className={styles.signupCheckbox} type="checkbox" id="terms" />
+          <label htmlFor="terms" className={styles.signupTerms}>
             I agree to the <a href="#">Terms of Service</a> and{" "}
             <a href="#">Privacy Policy</a>
           </label>
         </div>
-        <button className={styles.loginButton} type="submit">
+        <button className={styles.signupButton} type="submit">
           Create my account
         </button>
       </form>
@@ -109,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
