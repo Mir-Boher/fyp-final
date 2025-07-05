@@ -1,0 +1,65 @@
+.container {
+  background: #f5f7fa;
+  padding: 2.5rem 1rem 3rem 1rem;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 2rem auto;
+  text-align: center;
+}
+.heading {
+  font-size: 2.7rem;
+  font-weight: 600;
+  color: #15304b;
+  margin-bottom: 0.5rem;
+}
+.subheading {
+  font-size: 1.25rem;
+  color: #223b53;
+  margin-bottom: 2.5rem;
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: #fff;
+  border: 1px solid #dbe3ea;
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  max-width: 600px;
+  width: 100%;
+  cursor: pointer;
+  transition: box-shadow 0.15s, border 0.15s;
+}
+.option:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+  border-color: #ffd600;
+}
+.iconCircle {
+  width: 56px;
+  height: 56px;
+  aspect-ratio: 1 / 1; /* Ensures perfect circle */
+  border-radius: 50%;
+  background: #ffd600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+}
+.optionTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #15304b;
+  margin-bottom: 0.2rem;
+  text-align: left;
+}
+.optionDesc {
+  font-size: 1.05rem;
+  color: #15304b;
+  text-align: left;
+}

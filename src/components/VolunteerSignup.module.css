@@ -1,0 +1,132 @@
+.signupContainer {
+  max-width: 700px;
+  margin: 40px auto 40px auto;
+  padding: 0 1rem 2rem 1rem;
+  background: transparent;
+  text-align: center;
+}
+
+.signupHeader {
+  margin-bottom: 2.5rem;
+}
+
+.signupIcon {
+  margin: 0 auto 1.5rem auto;
+  width: 110px;
+  height: 110px;
+}
+
+.signupTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #15304b;
+  margin-bottom: 1rem;
+}
+
+.signupSubtitle {
+  font-size: 1.15rem;
+  color: #15304b;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.signupRow {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.signupCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.signupLabel {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #15304b;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.signupInput {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #cfd8dc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafbfc;
+  transition: border 0.2s;
+}
+
+.signupInput:focus {
+  border: 1.5px solid #3182ce;
+  outline: none;
+  background: #fff;
+}
+
+.signupCheckboxRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.signupCheckbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #ffd600;
+}
+
+.signupTerms {
+  font-size: 0.95rem;
+  color: #444;
+  text-align: left;
+}
+
+.signupTerms a {
+  color: #3182ce;
+  text-decoration: underline;
+}
+
+.signupButton {
+  width: 100%;
+  padding: 1rem 0;
+  background: #ffd600;
+  color: #15304b;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 2rem;
+  margin-top: 0.7rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.signupButton:hover {
+  background: #ffe066;
+}
+
+.signupFooter,
+.signupFooterAlt {
+  margin-top: 1.5rem;
+  color: #15304b;
+  font-size: 1rem;
+}
+
+.signupLink {
+  font-weight: 700;
+  color: #15304b;
+  text-decoration: underline;
+  margin-left: 0.2rem;
+}

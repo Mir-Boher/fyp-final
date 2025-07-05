@@ -29,7 +29,7 @@ const Navbar = () => {
         </button>
         <button
           className={styles.navbar__register_btn}
-          onClick={() => navigate("/signup")}
+          onClick={() => navigate("/register")}
         >
           Register
         </button>
