@@ -1,37 +1,37 @@
 import React from "react";
 import styles from "./Hero.module.css";
-import HeroImage from "../../assets/images/Human-Rights.png"; // Adjust the path as necessary
+import { Link } from "react-router-dom";
+import VolunteeringGroup from "../../assets/images/Volunteering-Group.png";
+import { FaArrowRight } from "react-icons/fa";
 
-const Hero = () => (
-  <section className={styles.hero}>
-    <div className={styles.heroContent}>
-      <div className={styles.left}>
-        <div className={styles.subtitle}>Why Use Q-volve platform?</div>
-        <h1 className={styles.title}>
-          In Q-volve you Support the <br />
-          causes that <span className={styles.highlight}>matter</span> to you.
+const Hero = () => {
+  return (
+    <section className={styles.heroSection}>
+      <div className={styles.heroContent}>
+        <h1 className={styles.heroTitle}>
+          We get nonprofits the
+          <br />
+          support they need for free.
         </h1>
-        <p className={styles.description}>
-          You're making a difference, but you don't have to do it alone. Q-Volve
-          connects social causes with skilled volunteers to empower
-          organizations and communities.
+        <p className={styles.heroSubtitle}>
+          You make the world a better place, but you can't do it alone.
+          <br />
+          Q-Volve is a nonprofit that connects social causes with skilled
+          volunteers to strengthen organizations — and communities.
         </p>
-        <div className={styles.actions}>
-          <button className={styles.primaryBtn}>Get started</button>
-          <button className={styles.secondaryBtn}>
-            Sign up for Q-volve <span className={styles.arrow}>&rarr;</span>
-          </button>
-        </div>
+        <Link to="/register" className={styles.heroButton}>
+          Get Started <FaArrowRight className={styles.arrowIcon} />
+        </Link>
       </div>
-      {/* <div className={styles.right}>
+      <div className={styles.heroImageWrapper}>
         <img
-          src={HeroImage}
-          alt="Volunteers working together"
-          className={styles.heroImg}
+          src={VolunteeringGroup}
+          alt="Volunteering Group"
+          className={styles.heroImage}
         />
-      </div> */}
-    </div>
-  </section>
-);
+      </div>
+    </section>
+  );
+};
 
 export default Hero;

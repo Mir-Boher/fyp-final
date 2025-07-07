@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Opportunity.module.css";
 import OpportunityCard from "./OpportunityCard";
 
@@ -6,7 +7,7 @@ const opportunities = [
   {
     title: "Volunteer Teacher",
     description: "Help teach children in underserved communities.",
-    image: "/images/Human-Rights.png", // or import and use a local image
+    image: "/images/Human-Rights.png",
     date: "Posted 11 Nov, 2025",
   },
   {
@@ -24,11 +25,19 @@ const opportunities = [
 ];
 
 const Opportunity = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.opportunity_container}>
       <div className={styles.opportunity_header_container}>
         <div className={styles.heading}>Latest Volunteer Opportunities</div>
-        <div className={styles.see_all}>See All</div>
+        <div
+          className={styles.see_all}
+          onClick={() => navigate("/opportunities")}
+          style={{ cursor: "pointer" }}
+        >
+          See All
+        </div>
       </div>
       <div className={styles.opportunity_list}>
         {opportunities.map((op, idx) => (

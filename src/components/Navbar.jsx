@@ -1,22 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   return (
     <nav className={styles.navbar}>
       {/* Left: Logo */}
-      <div className={styles.navbar__logo}>Q-volve</div>
+      <div className={styles.navbar__logo}>Q-Volve</div>
 
       {/* Center: Navigation Links */}
       <div className={styles.navbar__links}>
         <a href="/">Home</a>
-        <a href="/about">About</a>
+        <a href="/create">Build a Program</a>
         <a href="/opportunities">Opportunities</a>
-        <a href="/blogs">Blogs</a>
-        <a href="/contact">Contact Us</a>
+        <div
+          className={styles.navbar__dropdown}
+          onMouseEnter={() => setAboutOpen(true)}
+          onMouseLeave={() => setAboutOpen(false)}
+        >
+          <span className={styles.navbar__dropdown_trigger}>About</span>
+          {aboutOpen && (
+            <div className={styles.navbar__dropdown_menu}>
+              <div className={styles.dropdownDescription}>
+                Get to know our nonprofit and the people
+                <br />
+                making our world-class programming
+                <br />
+                possible.
+              </div>
+              <div className={styles.dropdownDivider} />
+              <a href="/about-us" className={styles.dropdownLink}>
+                About Us
+              </a>
+              <a href="/donate" className={styles.dropdownLink}>
+                Donate
+              </a>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Right: Auth Buttons */}

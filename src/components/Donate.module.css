@@ -1,0 +1,201 @@
+.donatePage {
+  background: #f5f8fa;
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+.waysToGiveSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: #f5f8fa;
+  border-radius: 12px;
+  padding: 2.5rem 2rem 2.5rem 2rem;
+  margin: 0 1rem 2.5rem 1rem;
+  gap: 2.5rem;
+  /* box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04); */
+}
+
+.waysToGiveLeft {
+  flex: 2;
+  min-width: 320px;
+}
+
+.waysToGiveTitle {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: #15304b;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #ffd600;
+  border-radius: 50%;
+  margin-right: 0.7rem;
+}
+
+.waysToGiveMain h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #15304b;
+  margin-bottom: 1.2rem;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.donateBtn {
+  background: #9eefff;
+  color: #15304b;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.8rem 2.2rem;
+  margin-bottom: 2rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.donateBtn:hover {
+  background: #7be3f7;
+}
+
+.impactTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #15304b;
+  margin: 2rem 0 1rem 0;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.impactOption {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1.5rem;
+}
+
+.impactOption strong {
+  font-size: 1.1rem;
+  color: #15304b;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.impactDesc {
+  color: #15304b;
+  font-size: 1rem;
+  margin-top: 0.2rem;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  background: none;
+}
+
+.waysToGiveRight {
+  flex: 1.2;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 3.5rem;
+}
+
+.heroSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f5f8fa;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  margin: 0 1rem;
+  gap: 2.5rem;
+  /* box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04); */
+}
+
+.heroContent {
+  flex: 1.2;
+  min-width: 320px;
+}
+
+.heroContent h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #15304b;
+  margin-bottom: 1.2rem;
+  font-family: "Montserrat", "Inter", Arial, sans-serif;
+}
+
+.heroContent p {
+  font-size: 1.15rem;
+  color: #15304b;
+  margin-bottom: 2.2rem;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.contactBtn {
+  background: #fff;
+  color: #15304b;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 2rem;
+  padding: 0.8rem 2.2rem;
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.contactBtn:hover {
+  background: #e6f7ff;
+  border: 2px solid #9eefff;
+}
+
+.heroArt {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donateArt {
+  width: 350px;
+  max-width: 100%;
+  border-radius: 18px;
+  object-fit: cover;
+  /* box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08); */
+}
+
+@media (max-width: 900px) {
+  .waysToGiveSection,
+  .heroSection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem 1rem;
+  }
+  .heroArt {
+    justify-content: flex-start;
+    margin-top: 1.5rem;
+  }
+}

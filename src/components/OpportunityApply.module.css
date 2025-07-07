@@ -1,0 +1,116 @@
+.applyContainer {
+  max-width: 600px;
+  margin: 0 auto 5rem auto;
+  padding: 48px 16px 0 16px;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.title {
+  font-size: 2.7rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.01em;
+}
+
+.subtitle {
+  text-align: center;
+  color: #444;
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 1rem;
+  color: #222;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 1rem 1.1rem;
+  border: 1px solid #d3d3d3;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fff;
+  font-family: inherit;
+  resize: none;
+  transition: border 0.2s;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #ffd600;
+  outline: none;
+}
+
+.uploadBox {
+  width: 100%;
+  min-height: 64px;
+  border: 1.5px dashed #d3d3d3;
+  border-radius: 7px;
+  background: #fafbfc;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: border 0.2s;
+  margin-top: 0.2rem;
+}
+
+.uploadBox:focus,
+.uploadBox:hover {
+  border-color: #ffd600;
+}
+
+.uploadLink {
+  color: #3cb4e7;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 0.2rem;
+}
+
+.fileInput {
+  display: none;
+}
+
+.submitBtn {
+  width: 100%;
+  background: #ffd600;
+  color: #222;
+  font-weight: 600;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: 7px;
+  padding: 1rem 0;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.submitBtn:hover {
+  background: #ffe066;
+}
+.uploadedFile {
+  color: #15304b;
+  font-weight: 500;
+  font-size: 1rem;
+}
