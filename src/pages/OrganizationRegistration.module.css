@@ -1,0 +1,131 @@
+/* OrganizationRegistration.module.css */
+.pageWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+}
+
+.registrationWrapper {
+  flex: 1;
+  padding: 2rem 0 3rem 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  gap: 1.5rem;
+}
+
+.cancelBtn {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  color: #222;
+  border-radius: 8px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cancelBtn:hover {
+  background: #f5f8fa;
+}
+
+.progressBar {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.stepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: #ffd600;
+  color: #222;
+  font-weight: 700;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.7rem;
+  padding: 0;
+}
+
+.completedStep .stepNumber {
+  background: #ffd600;
+  color: #15304b;
+}
+
+.activeStep .stepNumber {
+  background: #ffd600;
+  color: #222;
+}
+
+.inactiveStep .stepNumber {
+  background: #e2e8f0;
+  color: #888;
+}
+
+.completedStep,
+.activeStep,
+.inactiveStep {
+  font-size: 1.08rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.progressLine {
+  width: 2.5rem;
+  height: 2px;
+  background: #e2e8f0;
+  margin: 0 0.2rem;
+  border-radius: 1px;
+}
+
+.actionBtns {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nextBtn,
+.registerBtn,
+.backBtn {
+  background: #ffd600;
+  color: #222;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  /* padding: 0.7rem 2rem; */
+  cursor: pointer;
+  transition: background 0.2s;
+  /* min-width: 120px; */
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.nextBtn:hover,
+.registerBtn:hover,
+.backBtn:hover {
+  background: #ffe066;
+}
+.formSection {
+  margin: 0 auto;
+}
+
+.bottomBar {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}

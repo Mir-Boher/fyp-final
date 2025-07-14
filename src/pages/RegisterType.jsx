@@ -11,9 +11,9 @@ const RegisterType = () => {
   const handleSelect = (type) => {
     if (type === "volunteer") {
       navigate("/register/volunteer");
+    } else if (type === "organization") {
+      navigate("/register/organization");
     }
-    // You can add more navigation for "organization" if needed
-    // else if (type === "organization") { ... }
   };
 
   return (

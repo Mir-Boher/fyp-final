@@ -11,6 +11,7 @@ import VolunteerRegister from "./pages/VolunteerRegister";
 import ApplyPage from "./pages/ApplyPage";
 import Project from "./pages/Project";
 import ApplicationSuccess from "./pages/ApplicationSuccess";
+import OrganizationRegistration from "./pages/OrganizationRegistration";
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
         {/* Add more routes as needed */}
         <Route path="*" element={<NotFound />} />
         <Route path="/register" element={<RegisterType />} />
+        <Route
+          path="/register/organization"
+          element={<OrganizationRegistration />}
+        />
         <Route path="/register/volunteer" element={<VolunteerRegister />} />
         <Route path="/signin" element={<SignIn />} />
 

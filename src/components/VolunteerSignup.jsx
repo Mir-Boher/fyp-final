@@ -116,7 +116,7 @@ const VolunteerSignup = () => {
       </div>
       <div className={styles.signupFooterAlt}>
         Whoops! I want to create an{" "}
-        <Link to="/signup-organization" className={styles.signupLink}>
+        <Link to="/register/organization" className={styles.signupLink}>
           organization
         </Link>{" "}
         instead.
