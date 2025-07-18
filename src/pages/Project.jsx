@@ -8,6 +8,12 @@ import Footer from "../components/Footer";
 const Project = () => {
   const navigate = useNavigate();
 
+  const userType = localStorage.getItem("userType");
+  if (userType !== "volunteer") {
+    // Show alert or redirect to login
+    return;
+  }
+
   return (
     <>
       <Navbar />

@@ -3,8 +3,13 @@ import { useNavigate } from "react-router-dom";
 import styles from "./OpportunityCard.module.css";
 import humanRightsImg from "../../assets/images/Human-Rights.png";
 
-const OpportunityCard = ({ title, description, image, date }) => {
+const OpportunityCard = (op) => {
   const navigate = useNavigate();
+  const { id, title, description, image, date } = op;
+
+  const handleView = () => {
+    navigate(`/opportunity/${id}`, { state: { opportunity: op } });
+  };
 
   return (
     <div className={styles.opportunityCard}>
@@ -19,7 +24,7 @@ const OpportunityCard = ({ title, description, image, date }) => {
         <div className={styles.opportunityDate}>{date}</div>
       </div>
       <div className={styles.opportunityActions}>
-        <button onClick={() => navigate("/project")}>View Opportunity</button>
+        <button onClick={handleView}>View Opportunity</button>
       </div>
     </div>
   );

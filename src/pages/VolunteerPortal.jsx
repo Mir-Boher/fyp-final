@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import HeroPortal from "../components/HeroPortal";
 import Footer from "../components/Footer";
@@ -11,21 +11,32 @@ const causes = ["Cause", "Education", "Health", "Environment"];
 const orgTypes = ["Organization Type", "Nonprofit", "NGO", "Charity"];
 const timeCommitments = ["Time Commitment", "One-time", "Weekly", "Monthly"];
 
-// Example data for multiple opportunities
-const opportunities = Array.from({ length: 9 }).map((_, idx) => ({
-  id: idx + 1,
-  title: `Opportunity ${idx + 1}`,
-  description:
-    "Join us as a volunteer and help support local initiatives focused on education, health, and empowerment.",
-  image: "/images/Human-Rights.png",
-  date: "Posted 11 Nov, 2025",
-}));
-
 const VolunteerPortal = () => {
   const [selectedSkill, setSelectedSkill] = useState("Design & Creative");
   const [selectedCause, setSelectedCause] = useState(causes[0]);
   const [selectedOrg, setSelectedOrg] = useState(orgTypes[0]);
   const [selectedTime, setSelectedTime] = useState(timeCommitments[0]);
+  const [opportunities, setOpportunities] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchOpportunities = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/opportunities`);
+        if (!res.ok) throw new Error("Failed to fetch opportunities");
+        const data = await res.json();
+        setOpportunities(data);
+      } catch (err) {
+        setError(err.message || "Error loading opportunities");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOpportunities();
+  }, []);
 
   return (
     <div className={styles.volunteerPortalPage}>
@@ -63,17 +74,12 @@ const VolunteerPortal = () => {
             onSelect={setSelectedTime}
           />
         </div>
-
         {/* Opportunity Cards Container */}
+        {loading && <div>Loading opportunities...</div>}
+        {error && <div style={{ color: "#D7263D" }}>{error}</div>}
         <div className={styles.cardsContainer}>
           {opportunities.map((op) => (
-            <OpportunityCard
-              key={op.id}
-              title={op.title}
-              description={op.description}
-              image={op.image}
-              date={op.date}
-            />
+            <OpportunityCard key={op.id} {...op} date={`Posted: ${new Date(op.start_date).toLocaleDateString()}`} />
           ))}
         </div>
       </main>

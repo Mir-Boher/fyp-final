@@ -1,10 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./VolunteerSignup.module.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import CustomAlert from "./CustomAlert";
 
 const VolunteerSignup = () => {
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    confirmEmail: "",
+    confirmPassword: "",
+    terms: false,
+  });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [alert, setAlert] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    console.log("Volunteer registration attempt:", form);
+    if (form.email !== form.confirmEmail) {
+      setError("Emails do not match");
+      return;
+    }
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+    if (!form.terms) {
+      setError("You must agree to the terms");
+      return;
+    }
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register/volunteer`, {
+        username: form.username,
+        password: form.password,
+        first_name: form.first_name,
+        last_name: form.last_name,
+        email: form.email,
+      });
+      console.log("Volunteer registration response:", res);
+      localStorage.setItem("token", res.data.token); // Adjust if your backend returns a different key
+      setAlert("Registered successfully!");
+      setSuccess("Registration successful! Redirecting...");
+      setTimeout(() => {
+        setAlert("");
+        window.location.href = "/";
+      }, 1200);
+    } catch (err) {
+      console.error("Volunteer registration error:", err);
+      setError(err.response?.data?.message || "Registration failed");
+    }
+  };
+
   return (
     <div className={styles.signupContainer}>
+      <CustomAlert message={alert} type="success" onClose={() => setAlert("")} />
       <div className={styles.signupHeader}>
         <div className={styles.signupIcon}>
           {/* Volunteer SVG (same as RegisterSelectedType) */}
@@ -35,7 +99,7 @@ const VolunteerSignup = () => {
           profile!
         </div>
       </div>
-      <form className={styles.signupForm}>
+      <form className={styles.signupForm} onSubmit={handleSubmit}>
         <div className={styles.signupRow}>
           <div className={styles.signupCol}>
             <label className={styles.signupLabel}>First Name*</label>
@@ -43,6 +107,9 @@ const VolunteerSignup = () => {
               className={styles.signupInput}
               type="text"
               placeholder="First Name"
+              name="first_name"
+              value={form.first_name}
+              onChange={handleChange}
               required
             />
           </div>
@@ -52,9 +119,24 @@ const VolunteerSignup = () => {
               className={styles.signupInput}
               type="text"
               placeholder="Last Name"
+              name="last_name"
+              value={form.last_name}
+              onChange={handleChange}
               required
             />
           </div>
+        </div>
+        <div>
+          <label className={styles.signupLabel}>Username*</label>
+          <input
+            className={styles.signupInput}
+            type="text"
+            placeholder="Username"
+            name="username"
+            value={form.username}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div>
           <label className={styles.signupLabel}>Email Address*</label>
@@ -62,6 +144,9 @@ const VolunteerSignup = () => {
             className={styles.signupInput}
             type="email"
             placeholder="Email Address"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
             required
           />
         </div>
@@ -71,6 +156,9 @@ const VolunteerSignup = () => {
             className={styles.signupInput}
             type="email"
             placeholder="Confirm Email Address"
+            name="confirmEmail"
+            value={form.confirmEmail}
+            onChange={handleChange}
             required
           />
         </div>
@@ -80,6 +168,9 @@ const VolunteerSignup = () => {
             className={styles.signupInput}
             type="password"
             placeholder="Password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
             required
           />
         </div>
@@ -89,6 +180,9 @@ const VolunteerSignup = () => {
             className={styles.signupInput}
             type="password"
             placeholder="Password Confirmation"
+            name="confirmPassword"
+            value={form.confirmPassword}
+            onChange={handleChange}
             required
           />
         </div>
@@ -97,6 +191,9 @@ const VolunteerSignup = () => {
             className={styles.signupCheckbox}
             type="checkbox"
             id="terms"
+            name="terms"
+            checked={form.terms}
+            onChange={() => setForm((prev) => ({ ...prev, terms: !prev.terms }))}
             required
           />
           <label htmlFor="terms" className={styles.signupTerms}>

@@ -6,6 +6,8 @@ import Step1Basic from "../components/OrganizationFormSteps/Step1Basic";
 import Step2Contact from "../components/OrganizationFormSteps/Step2Contact";
 import Step3Account from "../components/OrganizationFormSteps/Step3Account";
 import styles from "./OrganizationRegistration.module.css";
+import axios from "axios";
+import CustomAlert from "../components/CustomAlert";
 
 const steps = [
   { label: "Basic" },
@@ -30,6 +32,8 @@ const OrganizationRegistration = () => {
   const [step, setStep] = useState(0);
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [alert, setAlert] = useState("");
 
   const [formData, setFormData] = useState({
     step1: { orgName: "", companyType: "", regNumber: "", yearFounded: "" },
@@ -104,6 +108,44 @@ const OrganizationRegistration = () => {
     navigate("/register");
   };
 
+  const handleRegister = async () => {
+    setError("");
+    setSuccess("");
+    const { orgName, companyType, regNumber, yearFounded } = formData.step1;
+    const { contactName, email, phone, city, country, about } = formData.step2;
+    const { username, password, confirmPassword } = formData.step3;
+    const payload = {
+      username,
+      password,
+      org_name: orgName,
+      company_type: companyType,
+      registration_number: regNumber,
+      year_founded: Number(yearFounded),
+      contact_person_name: contactName,
+      email,
+      phone,
+      city,
+      country,
+      about,
+    };
+    console.log("Organization registration attempt:", payload);
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register/organization`, payload);
+      console.log("Organization registration response:", res);
+      localStorage.setItem("token", res.data.token); // Adjust if your backend returns a different key
+      localStorage.setItem("userType", "organization");
+      setAlert("Registered successfully!");
+      setSuccess("Registration successful! Redirecting...");
+      setTimeout(() => {
+        setAlert("");
+        window.location.href = "/";
+      }, 1200);
+    } catch (err) {
+      console.error("Organization registration error:", err);
+      setError(err.response?.data?.message || "Registration failed");
+    }
+  };
+
   const stepProps = [
     {
       data: formData.step1,
@@ -122,6 +164,7 @@ const OrganizationRegistration = () => {
   return (
     <div className={styles.pageWrapper}>
       <Navbar />
+      <CustomAlert message={alert} type="success" onClose={() => setAlert("")} />
       <div className={styles.registrationWrapper}>
         <div className={styles.topBar}>
           <button className={styles.cancelBtn} onClick={handleCancel}>
@@ -161,7 +204,9 @@ const OrganizationRegistration = () => {
                 Next
               </button>
             ) : (
-              <button className={styles.registerBtn}>Register</button>
+              <button className={styles.registerBtn} onClick={handleRegister}>
+                Register
+              </button>
             )}
           </div>
         </div>
@@ -170,6 +215,11 @@ const OrganizationRegistration = () => {
             style={{ color: "red", textAlign: "center", marginBottom: "1rem" }}
           >
             {error}
+          </div>
+        )}
+        {success && (
+          <div style={{ color: "green", textAlign: "center", marginBottom: "1rem" }}>
+            {success}
           </div>
         )}
         <div className={styles.formSection}>

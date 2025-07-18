@@ -1,31 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Opportunity.module.css";
 import OpportunityCard from "./OpportunityCard";
 
-const opportunities = [
-  {
-    title: "Volunteer Teacher",
-    description: "Help teach children in underserved communities.",
-    image: "/images/Human-Rights.png",
-    date: "Posted 11 Nov, 2025",
-  },
-  {
-    title: "Community Health Worker",
-    description: "Support local health initiatives and awareness.",
-    image: "/images/Human-Rights.png",
-    date: "Posted 12 Nov, 2025",
-  },
-  {
-    title: "Environmental Volunteer",
-    description: "Join efforts to clean and green local parks and rivers.",
-    image: "/images/Human-Rights.png",
-    date: "Posted 13 Nov, 2025",
-  },
-];
-
 const Opportunity = () => {
   const navigate = useNavigate();
+  const [opportunities, setOpportunities] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchOpportunities = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/opportunities`);
+        if (!res.ok) throw new Error("Failed to fetch opportunities");
+        const data = await res.json();
+        setOpportunities(data);
+      } catch (err) {
+        setError(err.message || "Error loading opportunities");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOpportunities();
+  }, []);
 
   return (
     <div className={styles.opportunity_container}>
@@ -39,14 +39,17 @@ const Opportunity = () => {
           See All
         </div>
       </div>
+      {loading && <div>Loading opportunities...</div>}
+      {error && <div style={{ color: "#D7263D" }}>{error}</div>}
       <div className={styles.opportunity_list}>
-        {opportunities.map((op, idx) => (
+        {opportunities.map((op) => (
           <OpportunityCard
-            key={idx}
+            key={op.id}
+            id={op.id}
             title={op.title}
             description={op.description}
             image={op.image}
-            date={op.date}
+            date={`Posted: ${new Date(op.start_date).toLocaleDateString()}`}
           />
         ))}
       </div>
