@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import CustomAlert from "./CustomAlert";
+import axios from "axios";
+
+const defaultProfilePhoto =
+  "https://ui-avatars.com/api/?name=Profile&background=ffd600&color=15304b&size=256";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -11,6 +15,7 @@ const Navbar = () => {
   const [userType, setUserType] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [alert, setAlert] = useState("");
+  const [profilePhoto, setProfilePhoto] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -19,6 +24,29 @@ const Navbar = () => {
     setIsLoggedIn(!!token);
     setUserType(type);
     setDisplayName(name);
+    // Fetch profile photo if logged in
+    if (token) {
+      axios
+        .get(`${import.meta.env.VITE_API_URL}/auth/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          setProfilePhoto(res.data.user.profile_photo_url || null);
+        })
+        .catch(() => {
+          setProfilePhoto(null);
+        });
+    } else {
+      setProfilePhoto(null);
+    }
+    // Listen for profile photo updates from ProfileSettings
+    const handlePhotoUpdate = (e) => {
+      setProfilePhoto(e.detail.url);
+    };
+    window.addEventListener('profile-photo-updated', handlePhotoUpdate);
+    return () => {
+      window.removeEventListener('profile-photo-updated', handlePhotoUpdate);
+    };
   }, []);
 
   const handleLogout = () => {
@@ -32,6 +60,15 @@ const Navbar = () => {
     }, 1200);
   };
 
+  const handleBuildProgram = (e) => {
+    e.preventDefault();
+    if (userType === "organization") {
+      navigate("/post-opportunity");
+    } else {
+      navigate("/become-organization-info");
+    }
+  };
+
   return (
     <nav className={styles.navbar}>
       <CustomAlert message={alert} type="success" onClose={() => setAlert("")} />
@@ -40,8 +77,11 @@ const Navbar = () => {
       {/* Center: Navigation Links */}
       <div className={styles.navbar__links}>
         <a href="/">Home</a>
-        <a href="/create">Build a Program</a>
+        <a href="/create" onClick={handleBuildProgram}>Build a Program</a>
         <a href="/opportunities">Opportunities</a>
+        {userType === "organization" && (
+          <a href="/dashboard">Dashboard</a>
+        )}
         <div
           className={styles.navbar__dropdown}
           onMouseEnter={() => setAboutOpen(true)}
@@ -93,12 +133,20 @@ const Navbar = () => {
               tabIndex={0}
               role="button"
             >
-              {/* Simple profile SVG or image */}
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <circle cx="16" cy="16" r="16" fill="#FFD600" />
-                <circle cx="16" cy="12" r="6" fill="#fff" />
-                <ellipse cx="16" cy="24" rx="10" ry="6" fill="#fff" />
-              </svg>
+              {/* Show profile photo if available, else fallback SVG */}
+              {profilePhoto ? (
+                <img
+                  src={profilePhoto || defaultProfilePhoto}
+                  alt="Profile"
+                  style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover" }}
+                />
+              ) : (
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <circle cx="16" cy="16" r="16" fill="#FFD600" />
+                  <circle cx="16" cy="12" r="6" fill="#fff" />
+                  <ellipse cx="16" cy="24" rx="10" ry="6" fill="#fff" />
+                </svg>
+              )}
             </span>
             {profileOpen && (
               <div className={styles.profileDropdown}>

@@ -83,7 +83,7 @@ const OpportunityApply = () => {
         }
       );
       setLoading(false);
-      navigate("/application-success");
+    navigate("/application-success");
     } catch (err) {
       setLoading(false);
       setError(

@@ -17,6 +17,8 @@ const PostOpportunity = () => {
     commitment_type: "full-time",
     contact_email: "",
   });
+  const [photos, setPhotos] = useState([]); // Array of File objects
+  const [photoPreviews, setPhotoPreviews] = useState([]); // Array of preview URLs
   const [error, setError] = useState("");
   const [alert, setAlert] = useState("");
 
@@ -32,6 +34,37 @@ const PostOpportunity = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handlePhotoChange = (e) => {
+    const newFiles = Array.from(e.target.files);
+    setError("");
+    setPhotos(prev => {
+      // Append new files, filter out duplicates by name, and limit to 4
+      const allFiles = [...prev, ...newFiles];
+      const uniqueFiles = [];
+      const names = new Set();
+      for (const file of allFiles) {
+        if (!names.has(file.name) && uniqueFiles.length < 4) {
+          uniqueFiles.push(file);
+          names.add(file.name);
+        }
+      }
+      setPhotoPreviews(uniqueFiles.map(file => URL.createObjectURL(file)));
+      if (uniqueFiles.length > 4) {
+        setError("You can upload a maximum of 4 photos.");
+      }
+      return uniqueFiles;
+    });
+  };
+
+  // Remove a photo by index
+  const handleRemovePhoto = (idx) => {
+    setPhotos(prev => {
+      const newPhotos = prev.filter((_, i) => i !== idx);
+      setPhotoPreviews(newPhotos.map(file => URL.createObjectURL(file)));
+      return newPhotos;
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -39,10 +72,26 @@ const PostOpportunity = () => {
       setError("Please fill in all required fields.");
       return;
     }
+    if (photos.length === 0) {
+      setError("Please select at least one photo.");
+      return;
+    }
+    if (photos.length > 4) {
+      setError("You can upload a maximum of 4 photos.");
+      return;
+    }
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/opportunities`, form, {
+      const formData = new FormData();
+      Object.entries(form).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+      photos.forEach(photo => {
+        formData.append('photos', photo);
+      });
+      await axios.post(`${import.meta.env.VITE_API_URL}/opportunities`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
+          'Content-Type': 'multipart/form-data',
         },
       });
       setAlert("Opportunity posted successfully!");
@@ -56,6 +105,8 @@ const PostOpportunity = () => {
         commitment_type: "full-time",
         contact_email: "",
       });
+      setPhotos([]);
+      setPhotoPreviews([]);
       setTimeout(() => {
         setAlert("");
         navigate("/dashboard");
@@ -192,6 +243,56 @@ const PostOpportunity = () => {
                   style={inputStyle}
                   required
                 />
+              </div>
+              <div style={{ marginBottom: 18 }}>
+                <label style={{ fontWeight: 600, color: '#15304b', marginBottom: 6, display: 'block' }}>Opportunity Photos</label>
+                <input
+                  type="file"
+                  name="photos"
+                  accept="image/*"
+                  multiple
+                  max={4}
+                  onChange={handlePhotoChange}
+                  style={{ marginBottom: 8 }}
+                />
+                <div style={{ fontSize: 14, color: error && (photos.length === 0 || photos.length > 4) ? '#D7263D' : '#888', marginBottom: 4 }}>
+                  Please upload <b>at least 1</b> and <b>at most 4</b> photos.
+                </div>
+                {photoPreviews.length > 0 && (
+                  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 8 }}>
+                    {photoPreviews.map((src, idx) => (
+                      <div key={idx} style={{ position: 'relative', display: 'inline-block' }}>
+                        <img src={src} alt={`Preview ${idx + 1}`} style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 8, border: '1px solid #eee' }} />
+                        <button
+                          type="button"
+                          onClick={() => handleRemovePhoto(idx)}
+                          style={{
+                            position: 'absolute',
+                            top: -8,
+                            right: -8,
+                            background: '#fff',
+                            border: '1.5px solid #D7263D',
+                            color: '#D7263D',
+                            borderRadius: '50%',
+                            width: 22,
+                            height: 22,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontWeight: 700,
+                            fontSize: 16,
+                            cursor: 'pointer',
+                            boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
+                            zIndex: 2,
+                          }}
+                          aria-label="Remove photo"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               {error && <div style={{ color: "#D7263D", marginBottom: 16, fontSize: 16 }}>{error}</div>}
               <button

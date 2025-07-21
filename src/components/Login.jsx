@@ -31,7 +31,7 @@ const Login = () => {
       setAlert("Successfully logged in!");
       setTimeout(() => {
         setAlert("");
-        window.location.href = "/";
+      window.location.href = "/";
       }, 1200);
     } catch (err) {
       console.error("Login error:", err);

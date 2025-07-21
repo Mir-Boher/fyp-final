@@ -4,18 +4,20 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CustomAlert from "../components/CustomAlert";
 import humanRightsImg from "../assets/images/Human-Rights.png";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const OpportunityDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [op, setOp] = useState(location.state?.opportunity || null);
-  const [loading, setLoading] = useState(!location.state?.opportunity);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [alert, setAlert] = useState("");
 
   useEffect(() => {
-    if (op) return; // Already have data from state
     const fetchOpportunity = async () => {
       setLoading(true);
       setError("");
@@ -31,7 +33,19 @@ const OpportunityDetails = () => {
       }
     };
     fetchOpportunity();
-  }, [id, op]);
+  }, [id]);
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    adaptiveHeight: true,
+  };
+  const defaultPhoto = humanRightsImg;
+  const photos = op?.photos && op.photos.length > 0 ? op.photos : [defaultPhoto];
 
   const handleApply = () => {
     const userType = localStorage.getItem("userType");
@@ -47,26 +61,41 @@ const OpportunityDetails = () => {
       <Navbar />
       <CustomAlert message={alert} type="success" onClose={() => setAlert("")} />
       <div style={{ minHeight: "100vh", background: "linear-gradient(120deg, #f7faff 0%, #e9f7ff 100%)", padding: "2rem 0" }}>
-        <div style={{ maxWidth: 700, margin: "0 auto", padding: 36, background: "#fff", borderRadius: 18, boxShadow: "0 6px 32px rgba(0,0,0,0.10)", minHeight: 500 }}>
-          {loading && <div>Loading opportunity...</div>}
-          {error && <div style={{ color: "#D7263D" }}>{error}</div>}
+        <div style={{ maxWidth: 900, margin: "0 auto", background: "#fff", borderRadius: 18, boxShadow: "0 6px 32px rgba(0,0,0,0.10)", padding: 32, minHeight: 500 }}>
+          {loading && <div style={{ fontSize: 20, color: "#888" }}>Loading...</div>}
+          {error && !op && <div style={{ color: "#D7263D", fontSize: 18 }}>{error}</div>}
           {op && (
             <>
-              <div style={{ width: "100%", display: "flex", justifyContent: "center", marginBottom: 28 }}>
-                <img
-                  src={op.image || humanRightsImg}
-                  alt="Opportunity"
-                  style={{
-                    width: 320,
-                    height: 220,
-                    objectFit: "cover",
-                    borderRadius: 14,
-                    boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
-                    background: "#f7f8fa",
-                  }}
-                />
+              {/* Opportunity Photos Slider */}
+              <div style={{ marginBottom: 32 }}>
+                <Slider {...sliderSettings}>
+                  {photos.map((photo, idx) => {
+                    let src;
+                    // If it's a string, treat as URL; if not, treat as imported image
+                    if (typeof photo === 'string') {
+                      // If it's a data URL or starts with http, use as is
+                      if (photo.startsWith('http') || photo.startsWith('data:')) {
+                        src = photo;
+                      } else {
+                        src = `${import.meta.env.VITE_API_URL}/${photo}`;
+                      }
+                    } else {
+                      src = photo; // imported image
+                    }
+                    return (
+                      <div key={idx}>
+                        <img
+                          src={src}
+                          alt={`Opportunity Photo ${idx + 1}`}
+                          style={{ width: '100%', maxHeight: 350, objectFit: 'cover', borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.07)' }}
+                          onError={e => { e.target.onerror = null; e.target.src = humanRightsImg; }}
+                        />
+                      </div>
+                    );
+                  })}
+                </Slider>
               </div>
-              <h1 style={{ fontSize: 32, fontWeight: 800, color: "#15304b", marginBottom: 8 }}>{op.title}</h1>
+              <h1 style={{ fontSize: 32, fontWeight: 800, color: "#15304b", marginBottom: 12 }}>{op.title}</h1>
               <div style={{ color: "#888", fontSize: 18, marginBottom: 18 }}>{op.type} | {op.location}</div>
               <div style={{ marginBottom: 18 }}><strong>Organization:</strong> {op.org_name}</div>
               <div style={{ marginBottom: 18 }}><strong>Description:</strong> {op.description}</div>
