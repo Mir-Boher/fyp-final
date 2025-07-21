@@ -17,6 +17,7 @@ import Dashboard from "./pages/Dashboard";
 import OpportunityDetails from "./pages/OpportunityDetails";
 import ProfileSettings from "./pages/ProfileSettings";
 import BecomeOrganizationInfo from "./pages/BecomeOrganizationInfo";
+import DonatePage from "./pages/DonatePage";
 
 function App() {
   // Session timeout logic
@@ -59,6 +60,7 @@ function App() {
         <Route path="/opportunity/:id" element={<OpportunityDetails />} />
         <Route path="/profile" element={<ProfileSettings />} />
         <Route path="/become-organization-info" element={<BecomeOrganizationInfo />} />
+        <Route path="/donate" element={<DonatePage />} />
         {/* Add more routes as needed */}
         <Route path="*" element={<NotFound />} />
         <Route path="/register" element={<RegisterType />} />
