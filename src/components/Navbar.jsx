@@ -155,6 +155,9 @@ const Navbar = () => {
                       <button onClick={() => navigate("/post-opportunity")}>Post Opportunity</button>
                     </>
                   )}
+                  {userType === "volunteer" && (
+                    <button onClick={() => navigate("/my-applications")}>My Applications</button>
+                  )}
                   <button onClick={() => navigate("/profile")}>Profile Settings</button>
                   <button onClick={handleLogout}>Logout</button>
                 </div>

@@ -165,14 +165,18 @@ const PostOpportunity = () => {
               </div>
               <div style={{ marginBottom: 18 }}>
                 <label style={labelStyle}>Type*</label>
-                <input
-                  type="text"
+                <select
                   name="type"
                   value={form.type}
                   onChange={handleChange}
                   style={inputStyle}
                   required
-                />
+                >
+                  <option value="">Select Type</option>
+                  <option value="Education">Education</option>
+                  <option value="Health">Health</option>
+                  <option value="Environment">Environment</option>
+                </select>
               </div>
               <div style={{ marginBottom: 18 }}>
                 <label style={labelStyle}>Description*</label>
@@ -229,8 +233,10 @@ const PostOpportunity = () => {
                   style={inputStyle}
                   required
                 >
-                  <option value="full-time">Full-time</option>
-                  <option value="part-time">Part-time</option>
+                  <option value="">Select Commitment</option>
+                  <option value="One-time">One-time</option>
+                  <option value="Weekly">Weekly</option>
+                  <option value="Monthly">Monthly</option>
                 </select>
               </div>
               <div style={{ marginBottom: 18 }}>

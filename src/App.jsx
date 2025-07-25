@@ -18,6 +18,8 @@ import OpportunityDetails from "./pages/OpportunityDetails";
 import ProfileSettings from "./pages/ProfileSettings";
 import BecomeOrganizationInfo from "./pages/BecomeOrganizationInfo";
 import DonatePage from "./pages/DonatePage";
+import MyApplications from "./pages/MyApplications";
+import LogHours from "./pages/LogHours";
 
 function App() {
   // Session timeout logic
@@ -61,6 +63,8 @@ function App() {
         <Route path="/profile" element={<ProfileSettings />} />
         <Route path="/become-organization-info" element={<BecomeOrganizationInfo />} />
         <Route path="/donate" element={<DonatePage />} />
+        <Route path="/my-applications" element={<MyApplications />} />
+        <Route path="/log-hours/:opportunity_id" element={<LogHours />} />
         {/* Add more routes as needed */}
         <Route path="*" element={<NotFound />} />
         <Route path="/register" element={<RegisterType />} />

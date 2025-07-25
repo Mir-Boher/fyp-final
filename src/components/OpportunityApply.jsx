@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./OpportunityApply.module.css";
 import axios from "axios";
@@ -21,6 +21,26 @@ const OpportunityApply = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const opportunity = location.state?.opportunity;
+
+  useEffect(() => {
+    // Fetch volunteer profile for autofill
+    const fetchProfile = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/auth/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const user = res.data.user;
+        if (user) {
+          setFullName((user.first_name || "") + (user.last_name ? " " + user.last_name : ""));
+          setEmail(user.email || "");
+        }
+      } catch (err) {
+        // Optionally handle error
+      }
+    };
+    fetchProfile();
+  }, []);
 
   const handleUploadClick = () => {
     fileInputRef.current.click();
@@ -83,7 +103,7 @@ const OpportunityApply = () => {
         }
       );
       setLoading(false);
-    navigate("/application-success");
+      navigate("/application-success");
     } catch (err) {
       setLoading(false);
       setError(
@@ -121,6 +141,7 @@ const OpportunityApply = () => {
             ref={fullNameRef}
             required
             style={fieldErrors.fullName ? { borderColor: '#D7263D' } : {}}
+            readOnly
           />
           {fieldErrors.fullName && <span style={{ color: '#D7263D', fontSize: 13 }}>{fieldErrors.fullName}</span>}
         </div>
@@ -135,6 +156,7 @@ const OpportunityApply = () => {
             ref={emailRef}
             required
             style={fieldErrors.email ? { borderColor: '#D7263D' } : {}}
+            readOnly
           />
           {fieldErrors.email && <span style={{ color: '#D7263D', fontSize: 13 }}>{fieldErrors.email}</span>}
         </div>
